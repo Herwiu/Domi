@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+  <meta charset="UTF-8" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="icon" href="icon-192.png" type="image/png">
+  <link rel="apple-touch-icon" href="icon-192.png">
+  <meta name="theme-color" content="#ff69b4" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title><3</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .form-container, .password-container {
+      background-color: rgba(255, 192, 203, 0.9);
+      border-radius: 16px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+      padding: 20px;
+      text-align: center;
+      max-width: 400px;
+      width: 90%;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 1.5em;
+      color: #333;
+      margin-bottom: 10px;
+    }
+
+    input, textarea, select {
+      width: 90%;
+      margin: 10px auto;
+      padding: 10px;
+      font-size: 1em;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      box-sizing: border-box;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .button-container {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      margin-top: 20px;
+    }
+
+    button {
+      background-color: #ff69b4;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+      border: none;
+      border-radius: 8px;
+      padding: 10px 20px;
+      font-size: 1em;
+      transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+      background-color: #ff1493;
+    }
+  </style>
+</head>
+<body>
+  <!-- Ekran hasła -->
+  <div class="password-container" id="password-screen">
+    <h1>Podaj hasło 🔐</h1>
+    <input type="password" id="password-input" placeholder="Hasło">
+    <div class="button-container">
+      <button onclick="checkPassword()">Zatwierdź</button>
+    </div>
+  </div>
+
+  <!-- Formularz ukryty do momentu wpisania hasła -->
+  <div class="form-container" id="form-screen" style="display: none;">
+    <h1>Raport aktualnego stanu💞</h1>
+    <form action="https://formspree.io/f/xrbqrpyn" method="POST">
+      <input type="text" name="Tytuł" placeholder="Tytuł" required />
+      <textarea name="Co cię martwi" placeholder="Co Cię martwi?" rows="4" required></textarea>
+
+      <label for="mood">Nastrój:</label>
+      <select name="Nastrój" id="mood">
+        <option value="😡 Zły">😡 Zły</option>
+        <option value="😢 Smutny">😢 Smutny</option>
+        <option value="🙂 Neutralny">🙂 Neutralny</option>
+        <option value="😊 Szczęśliwy">😊 Szczęśliwy</option>
+		<option value="🥵 Horny">🥵 Horny</option>
+      </select>
+
+      <label for="severity">Powaga:</label>
+      <select name="Powaga" id="severity">
+        <option value="Niska">Niska</option>
+        <option value="Średnia">Średnia</option>
+        <option value="Wysoka">Wysoka</option>
+		<option value="Bardzo wysoka">Bardzo wysoka</option>
+		<option value="Nie dotyczy">Nie dotyczy</option>
+      </select>
+
+      <div class="button-container">
+        <button type="submit">Wyślij 💌</button>
+      </div>
+    </form>
+  </div>
+
+  <script>
+    function checkPassword() {
+      const password = document.getElementById("password-input").value;
+      const correctPassword = "Kocham Cię";
+
+      if (password === correctPassword) {
+        document.getElementById("password-screen").style.display = "none";
+        document.getElementById("form-screen").style.display = "flex";
+      } else {
+        alert("Nieprawidłowe hasło 😢");
+      }
+    }
+  </script>
+</body>
+</html>
