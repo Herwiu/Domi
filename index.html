@@ -12,11 +12,21 @@
     body {
       font-family: Arial, sans-serif;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
       height: 100vh;
       margin: 0;
       background-color: #f4f4f4;
+      overflow: hidden; /* Blokuje przewijanie */
+    }
+
+    .random-text-container {
+      text-align: center;
+      margin-bottom: 20px;
+      font-size: 1.2em;
+      font-weight: bold;
+      color: #ff69b4;
     }
 
     .form-container, .password-container, .thank-you-container {
@@ -87,6 +97,11 @@
     </div>
   </div>
 
+  <!-- Losowy tekst -->
+  <div class="random-text-container" id="random-text" style="display: none;">
+    <!-- Tekst zostanie wstawiony tutaj po podaniu hasła -->
+  </div>
+
   <!-- Formularz ukryty do momentu wpisania hasła -->
   <div class="form-container" id="form-screen" style="display: none;">
     <h1>Raport aktualnego stanu💞</h1>
@@ -103,7 +118,7 @@
         <option value="🥵 Horny">🥵 Horny</option>
         <option value="🤤 Craving">🤤 Craving</option>
         <option value="😴 Zmeńciona">😴 Zmeńciona</option>
-		<option value="🥱 Znudzona">🥱 Znudzona</option>
+        <option value="🥱 Znudzona">🥱 Znudzona</option>
       </select>
 
       <label for="severity">Powaga:</label>
@@ -119,6 +134,9 @@
         <button type="submit">Wyślij 💌</button>
       </div>
     </form>
+    <div class="button-container">
+      <button onclick="hideFormFor10Seconds()">Pokaż tło na 10 sekund 🌟</button>
+    </div>
   </div>
 
   <!-- Sekcja z podziękowaniem -->
@@ -132,6 +150,23 @@
   </div>
 
   <script>
+    // Losowy tekst
+    const randomTexts = [
+      "Miłego dnia! 😊",
+      "Hej, Kocham Cię! 😘",
+      "Pięknie dziś wyglądasz 👀",
+      "MWAH!",
+      "Hello Sweetheart ❤️"
+    ];
+
+    // Funkcja wybierająca losowy tekst
+    function displayRandomText() {
+      const randomIndex = Math.floor(Math.random() * randomTexts.length);
+      const randomTextElement = document.getElementById("random-text");
+      randomTextElement.textContent = randomTexts[randomIndex];
+      randomTextElement.style.display = "block"; // Pokaż tekst
+    }
+
     function checkPassword() {
       const password = document.getElementById("password-input").value;
       const correctPassword = "KochamCie";
@@ -144,6 +179,9 @@
         document.body.style.backgroundPosition = "center";
         document.body.style.backgroundRepeat = "no-repeat";
         document.body.style.backgroundAttachment = "fixed";
+
+        // Wyświetl losowy tekst
+        displayRandomText();
       } else {
         alert("Nieprawidłowe hasło 😢");
       }
@@ -179,6 +217,14 @@
       document.getElementById('form-screen').style.display = 'flex';
       // Resetuj wartości w formularzu
       document.getElementById('grievanceForm').reset();
+    }
+
+    function hideFormFor10Seconds() {
+      const formScreen = document.getElementById('form-screen');
+      formScreen.style.display = 'none'; // Ukryj formularz
+      setTimeout(() => {
+        formScreen.style.display = 'flex'; // Pokaż formularz po 10 sekundach
+      }, 10000); // 10 sekund
     }
   </script>
 </body>
