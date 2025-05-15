@@ -26,7 +26,7 @@
       margin-bottom: 20px;
       font-size: 1.2em;
       font-weight: bold;
-      color: #ff69b4;
+      color: #4b0082; /* Ciemny fiolet */
     }
 
     .form-container, .password-container, .thank-you-container {
@@ -88,6 +88,11 @@
   </style>
 </head>
 <body>
+  <!-- Losowy tekst -->
+  <div class="random-text-container" id="random-text" style="display: none;">
+    <!-- Tekst zostanie wstawiony tutaj po podaniu hasła -->
+  </div>
+
   <!-- Ekran hasła -->
   <div class="password-container" id="password-screen">
     <h1>Podaj hasło 🔐</h1>
@@ -95,11 +100,6 @@
     <div class="button-container">
       <button onclick="checkPassword()">Zatwierdź</button>
     </div>
-  </div>
-
-  <!-- Losowy tekst -->
-  <div class="random-text-container" id="random-text" style="display: none;">
-    <!-- Tekst zostanie wstawiony tutaj po podaniu hasła -->
   </div>
 
   <!-- Formularz ukryty do momentu wpisania hasła -->
@@ -221,9 +221,16 @@
 
     function hideFormFor10Seconds() {
       const formScreen = document.getElementById('form-screen');
-      formScreen.style.display = 'none'; // Ukryj formularz
+      const randomText = document.getElementById('random-text');
+      
+      // Ukryj formularz i losowy tekst
+      formScreen.style.display = 'none';
+      randomText.style.display = 'none';
+
+      // Przywróć formularz i losowy tekst po 10 sekundach
       setTimeout(() => {
-        formScreen.style.display = 'flex'; // Pokaż formularz po 10 sekundach
+        formScreen.style.display = 'flex';
+        randomText.style.display = 'block';
       }, 10000); // 10 sekund
     }
   </script>
